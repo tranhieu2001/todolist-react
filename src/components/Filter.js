@@ -6,9 +6,8 @@ import {
   RadioGroup,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setPriorityFilter, switchFilter } from '../redux/actions/filterActions'
