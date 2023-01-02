@@ -1,5 +1,5 @@
 import ClearIcon from '@mui/icons-material/Clear'
-import { Button, Checkbox, Stack, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Stack, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -9,11 +9,11 @@ import {
   toggleAll,
 } from '../redux/actions/todoActions'
 import { todoListSelector } from '../redux/selectors'
+import buttonStyle from './buttonStyle'
 import TodoInput from './TodoInput'
 
 function TodoList() {
   const todoList = useSelector(todoListSelector)
-
   const dispatch = useDispatch()
 
   const handleToggle = (id) => {
@@ -49,19 +49,26 @@ function TodoList() {
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center">
-          <Typography
-            pr={2}
-            sx={todoItem.completed && { textDecoration: 'line-through' }}
+          <Box
+            component="button"
+            sx={
+              buttonStyle.find((button) => button.value === todoItem.priority)
+                .style
+            }
           >
-            {todoItem.priority[0].toUpperCase() + todoItem.priority.slice(1)}
-          </Typography>
+            <Typography
+              sx={todoItem.completed && { textDecoration: 'line-through' }}
+            >
+              {todoItem.priority[0].toUpperCase() + todoItem.priority.slice(1)}
+            </Typography>
+          </Box>
           <Button
             variant="text"
+            size="small"
             sx={{
               cursor: 'pointer',
               color: 'black',
             }}
-            size="small"
             onClick={() => {
               handleDelete(todoItem.id)
             }}

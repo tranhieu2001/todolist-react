@@ -1,18 +1,19 @@
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded'
 import {
   Box,
   Button,
   FormControl,
+  InputAdornment,
   MenuItem,
   Select,
   TextField,
-  InputAdornment,
 } from '@mui/material'
 import { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuid } from 'uuid'
-import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded'
 
 import { addTodo } from '../redux/actions/todoActions'
+import buttonStyle from './buttonStyle'
 
 function TodoInput() {
   const dispatch = useDispatch()
@@ -83,9 +84,15 @@ function TodoInput() {
         <Box width="120px">
           <FormControl fullWidth size="small">
             <Select value={priority} onChange={handleChangePriority}>
-              <MenuItem value={'low'}>Low</MenuItem>
-              <MenuItem value={'medium'}>Medium</MenuItem>
-              <MenuItem value={'high'}>High</MenuItem>
+              {buttonStyle.map((button) => {
+                return (
+                  <MenuItem value={button.value} key={button.value}>
+                    <Box component="button" sx={button.style}>
+                      {button.value[0].toUpperCase() + button.value.slice(1)}
+                    </Box>
+                  </MenuItem>
+                )
+              })}
             </Select>
           </FormControl>
         </Box>

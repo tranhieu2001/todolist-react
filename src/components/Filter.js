@@ -6,7 +6,7 @@ import {
   RadioGroup,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -57,6 +57,7 @@ function Filter() {
         <Typography fontSize={16} fontWeight={700}>
           Filter By Priority
         </Typography>
+
         <Autocomplete
           disablePortal
           id="combo-box-demo"
