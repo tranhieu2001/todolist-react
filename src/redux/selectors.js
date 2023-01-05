@@ -3,7 +3,7 @@ export const currentFilterSelector = (state) => state.filter.status
 
 export const todoListSelector = (state) => {
   const currentFilter = currentFilterSelector(state)
-  const currentSearch = state.filter.searchFilter
+  const currentSearch = state.filter.searchFilter.toLowerCase()
   const todoListFull = state.todo
   const currentPriority = state.filter.priority
 
@@ -20,7 +20,7 @@ export const todoListSelector = (state) => {
   if (currentSearch) {
     return todoListPriority
       .filter((todoItem) => {
-        return todoItem.todo.includes(currentSearch)
+        return todoItem.todo.toLowerCase().includes(currentSearch)
       })
       .filter(todoFilter.filter)
   } else {
