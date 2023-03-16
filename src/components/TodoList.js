@@ -9,6 +9,7 @@ import TodoItem from './TodoItem'
 function TodoList() {
   const dispatch = useDispatch()
   const todoList = useSelector(todoListSelector)
+  
   const handleToggleAll = () => {
     dispatch(toggleAll())
   }

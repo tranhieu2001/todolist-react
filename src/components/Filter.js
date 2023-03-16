@@ -12,19 +12,23 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { setPriorityFilter, switchFilter } from '../redux/actions/filterActions'
 import { currentFilterSelector, filterListSelector } from '../redux/selectors'
+import buttonStyle from './buttonStyle'
 
 function Filter() {
   const dispatch = useDispatch()
-
   const filterList = useSelector(filterListSelector)
   const status = useSelector(currentFilterSelector)
+
+  const options = buttonStyle.map((option) => {
+    return option.value[0].toUpperCase() + option.value.slice(1)
+  })
 
   const handleChangeFilter = (e) => {
     const currentFilter = e.target.value
     dispatch(switchFilter(currentFilter))
   }
 
-  const handleChangePriority = (e, newValue) => {
+  const handleChangePriority = (newValue) => {
     dispatch(setPriorityFilter(newValue))
   }
 
@@ -61,7 +65,7 @@ function Filter() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={['High', 'Medium', 'Low']}
+          options={options}
           size="small"
           onChange={handleChangePriority}
           renderInput={(params) => <TextField {...params} />}
