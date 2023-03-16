@@ -1,83 +1,20 @@
-import ClearIcon from '@mui/icons-material/Clear'
-import { Box, Button, Checkbox, Stack, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-  deleteCompleted,
-  deleteTodo,
-  toggle,
-  toggleAll,
-} from '../redux/actions/todoActions'
+import { deleteCompleted, toggleAll } from '../redux/actions/todoActions'
 import { todoListSelector } from '../redux/selectors'
-import buttonStyle from './buttonStyle'
 import TodoInput from './TodoInput'
+import TodoItem from './TodoItem'
 
 function TodoList() {
-  const todoList = useSelector(todoListSelector)
   const dispatch = useDispatch()
-
-  const handleToggle = (id) => {
-    dispatch(toggle(id))
-  }
-
-  const handleDelete = (id) => {
-    dispatch(deleteTodo(id))
-  }
-
+  const todoList = useSelector(todoListSelector)
   const handleToggleAll = () => {
     dispatch(toggleAll())
   }
 
   const handleDeleteCompleted = () => {
     dispatch(deleteCompleted())
-  }
-
-  const TodoItem = ({ todoItem }) => {
-    return (
-      <Stack direction="row" alignItems="center" width="100%">
-        <Stack direction="row" alignItems="center" flex={1}>
-          <Checkbox
-            checked={todoItem.completed}
-            onChange={() => {
-              handleToggle(todoItem.id)
-            }}
-          />
-          <Typography
-            sx={todoItem.completed && { textDecoration: 'line-through' }}
-          >
-            {todoItem.todo}
-          </Typography>
-        </Stack>
-        <Stack direction="row" alignItems="center">
-          <Box
-            component="button"
-            sx={
-              buttonStyle.find((button) => button.value === todoItem.priority)
-                .style
-            }
-          >
-            <Typography
-              sx={todoItem.completed && { textDecoration: 'line-through' }}
-            >
-              {todoItem.priority[0].toUpperCase() + todoItem.priority.slice(1)}
-            </Typography>
-          </Box>
-          <Button
-            variant="text"
-            size="small"
-            sx={{
-              cursor: 'pointer',
-              color: 'black',
-            }}
-            onClick={() => {
-              handleDelete(todoItem.id)
-            }}
-          >
-            <ClearIcon />
-          </Button>
-        </Stack>
-      </Stack>
-    )
   }
 
   return (

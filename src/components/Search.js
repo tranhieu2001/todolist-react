@@ -36,7 +36,6 @@ function Search() {
 
       <TextField
         inputRef={ref}
-        id="outlined-basic"
         placeholder="Input search todo"
         variant="outlined"
         size="small"
